@@ -1,0 +1,178 @@
+Notes for Assignment Amazon Access Classifier 
+---------------------------------------------
+
+
+Logging
+-------
+
+This module defines functions and classes which implement a flexible error logging system for applications
+
+Example
+
+    CODE
+
+    import Logging
+    LOG_FILENAME = 'example.log'
+    logging.basicConfig(filename=LOG_FILENAME,level=logging.DEBUG)
+    logging.debug('This message should go to the log file')
+
+    OUTPUT
+
+    DEBUG:root:This message should go to the log file 
+
+
+The logging Library takes a modular approach and offers the several categories of components
+    
+    1) Loggers
+    2) Handlers
+    3) Filters
+    4) Formatters
+
+
+
+    - Handlers send the log records to appropriate destination
+    - Formatters specify the layout of the resultant log record
+    - Filter provide a grained facility for determining which log records to send on to a handler 
+
+    Logger Objects have a threefold job
+        
+        - First, they expose several methods to application code so that applications can log messages at runtime
+        - Second, logger objects determine which log messages to act upon based upon severity (the default filtering facility) or filter objects.
+        -  Third, logger objects pass along relevant log messages to all interested log handlers.
+
+
+* getLogger() returns a reference to a logger instance with the specified name if it is provided, or root if not.
+* Handler.setLevel() method, just as in logger objects, specifies the lowest severity that will be dispatched to the appropriate destination.
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Numpy 
+-----
+
+  - loadtxt 
+
+        fn def : numpy.loadtxt(fname, dtype=<type 'float'>, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=False, ndmin=0)
+
+        parameters:
+
+            fname : file, str, or pathlib.Path
+    
+                File, filename, or generator to read. If the filename extension is .gz or .bz2, the file is first decompressed. 
+
+            dtype : data-type, optional
+
+                Data-type of the resulting array; default: float
+
+            delimiter : str, optional
+
+                The string used to separate values. By default, this is any whitespace.
+
+            skiprows : int, optional
+
+                Skip the first skiprows lines; default: 0.
+
+            usecols : int or sequence, optional
+
+                Which columns to read, with 0 being the first. For example, usecols = (1,4,5) will extract the 2nd, 5th and 6th columns.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Argument Parser
+
+    -   argparse
+        
+        The argparse module makes it easy to write user-friendly command-line interfaces. 
+        The program defines what arguments it requires, and argparse will figure out how to parse those out of sys.argv. 
+        The argparse module also automatically generates help and usage messages and issues errors when users give the program invalid arguments.
+
+        Example
+
+            # Import argument parser
+            import argparse
+
+            # Create an argument parser object
+            parser = argparse.ArgumentParser(description='....')
+
+            #Adding arguments
+            #Filling an ArgumentParser with information about program arguments is done by making calls to the add_argument() method.
+            #Generally, these calls tell the ArgumentParser how to take the strings on the command line and turn them into objects. 
+            #This information is stored and used when parse_args() is called.
+
+            parser.add_argument('integers', metavar='N', type=int, nargs='+',
+            ...                     help='an integer for the accumulator')
+
+            
+            
+
+        Flags
+        -----
+            
+            action  - The basic type of action to be taken when this argument is encountered at the command line.
+            default - The value produced if the argument is absent from the command line.
+            type    - The type to which the command-line argument should be converted
+            help    - A brief description of what the argument does.
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Boosting
+
+    What is Boosting ?
+
+    A) The term 'Boosting' refers to a family of algorithms which converts weak learner to strong learners
+
+    How  Boosting algorithm works ?
+
+    A) By definition of Boosting, it converts weak learner to strong learners. How do we identify weak learners ?. To find weak rule,we apply base Machine Learning 
+       algorithms with a different distribution. Each time base learning algorithm is applied, it generates a new weak prediction rule.This is an iterative process
+       After many iterations, the boosting algorithm combines these weak rules into a single strong prediction rule 
+
+    How do we choose different distribution for each round?
+    
+    A) 
+        Step #1:  The base learner takes all the distributions and assign equal weight or attention to each observation.
+
+        Step #2:  If there is any prediction error caused by first base learning algorithm, then we pay higher attention to observations having prediction error.
+                  Then we apply the next base learning algorithm
+
+        Step #3:  Iterate Step 2 till the limit of base learning algorithm is reached or higher accuracy is achieved
+
+        Finally, it combines the outputs from weak learners and creates a strong learner which eventually improves the prediction power of the model.Boosting pays
+        higher focus on examples which are mis-classified or have higher errors by preceding weak rules 
+
+
+    
+    Types of Boosting Algorithms ?
+
+        1. AdaBoost (Adaptive Boosting)
+        2. Gradient Tree Boosting
+        3. XGBoost
+
+
+    Ensemble classifier in general
+    ------------------------------
+        
+        - Goa1
+
+            - Predict output y
+                
+                .Either +1 or -1
+            
+            - From input x
+
+        - Learn ensemble model:
+            
+            - Classifiers  : f1(x),f2(x),f3(x),f4(x),f5(x).....FT(x) where T is the no of base classifier
+            - Coefficients : W1,W2,W3,W4,...,WT
+
+        - Prediction 
+            
+                y^^ = sign ( sum of all weak classifiers * their corresponding weights)
+
+
+
+
+       
+
+        
